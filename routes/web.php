@@ -27,5 +27,6 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'store']); // toma el name anterior
 Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
-Route::get('/muro', [PostController::class, 'index'])->name('posts.index');
+Route::get('/{user:username}', [PostController::class, 'index'])->name('posts.index'); // Route Model Binding para rutas con parámetros dinámicos
+Route::get('/post/create', [PostController::class, 'create'])->name('posts.create');
 
