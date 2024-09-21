@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('layouts.app');
+    return view('principal');
 });
-Route::get('/nosotros', function () {
-    return view('nosotros');
-});
+
