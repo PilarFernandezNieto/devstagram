@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>DevStagram - @yield('titulo')</title>
+    @stack('styles')
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
 
@@ -30,7 +31,7 @@
                         </svg>
 
                         Crear</a>
-                    <a href="#" class="font-bold text-gray-600 text-sm">Hola, <span
+                    <a href="{{route('posts.index', auth()->user()->username)}}" class="font-bold text-gray-600 text-sm">Hola, <span
                             class="font-normal">{{ auth()->user()->username }}</span></a>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
