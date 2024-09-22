@@ -14,7 +14,7 @@ class PostFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition() // php artisan tinker
     {
         return [
             'titulo' => $this->faker->sentence(5),
