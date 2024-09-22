@@ -3,6 +3,8 @@
 @section('titulo')
     Nueva Publicación
 @endsection
+{{-- Inserta hojas de estilo o scripts solo para la vista donde se definen--}}
+{{-- En app.blade.php se tiene que definir la directiva @stack() --}}
 @push('styles')
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 @endpush
