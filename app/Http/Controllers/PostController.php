@@ -8,13 +8,19 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller {
 
+    /**
+     * Se añade un middleware de autenticación para proteger la url
+     * Excepto en los métodos que se especifican que son públicos
+     */
     public function __construct() {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['show', 'index']);
     }
 
     public function index(User $user) {
 
-        $posts = Post::where('user_id', $user->id)->get();
+        $posts = Post::where('user_id', $user->id)->paginate(5);
+        // Existe la opción de utilizar la colección de posts que va cargada en el usuario gracias a la relación 1:N
+        // pero esta opción no admite la paginación en el template
 
         return view('dashboard', [
             'user' => $user,
@@ -56,8 +62,13 @@ class PostController extends Controller {
             'imagen' => $request->imagen,
             'user_id' => auth()->user()->id
         ]);
-
-
         return redirect()->route('posts.index', auth()->user()->username);
+    }
+
+    public function show(User $user, Post $post){
+
+        return view('posts.show', [
+            'post' => $post
+        ]);
     }
 }
