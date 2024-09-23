@@ -65,15 +65,18 @@ class PostController extends Controller {
         return redirect()->route('posts.index', auth()->user()->username);
     }
 
-    public function show(User $user, Post $post){
+    public function show(User $user, Post $post) {
 
         return view('posts.show', [
-            'user'=> $user,
+            'user' => $user,
             'post' => $post
         ]);
     }
 
-    public function destroy(Post $post){
-        dd("Eliminando...", $post->id);
+    public function destroy(Post $post) {
+       $this->authorize('delete', $post);
+       $post->delete();
+
+       return redirect()->route('posts.index', auth()->user()->username);
     }
 }
