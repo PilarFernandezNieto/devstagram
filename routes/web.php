@@ -45,7 +45,6 @@ Route::get('/{user:username}', [PostController::class, 'index'])->name('posts.in
 
 Route::post('/{user:username}/posts/{post}', [ComentarioController::class, 'store'])->name('comentarios.store');
 
-
 Route::post('/imagenes', [ImagenController::class, 'store'])->name('imagenes.store');
 
 // Like a las fotos
@@ -55,6 +54,7 @@ Route::delete('/posts/{post}/likes', [LikeController::class, 'destroy'])->name('
 // Siguiendo usuarios
 Route::post('/{user:username}/follow', [FollowerController::class, 'store'])->name('users.follow');
 Route::delete('/{user:username}/unfollow', [FollowerController::class, 'destroy'])->name('users.unfollow');
+
 
 
 

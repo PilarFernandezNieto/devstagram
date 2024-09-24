@@ -51,4 +51,18 @@ class User extends Authenticatable
     public function likes(){
         return $this->hasMany(Like::class);
     }
+
+    // Almacena los seguidores de un usuario
+    public function followers(){
+        return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id')->withTimestamps();
+        // withTimeStamps() se utiliza porque en el controlador estamos creado el registro con attach, que no actualiza los campos
+        // created_at y modified_at
+    }
+
+    // Comprueba si un usuario sigue a otro
+    public function siguiendo(User $user){
+        return $this->followers->contains($user->id);
+    }
+
+    // Almacena los que seguimos
 }
