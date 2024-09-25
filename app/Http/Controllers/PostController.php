@@ -19,9 +19,10 @@ class PostController extends Controller {
 
     public function index(User $user) {
 
-        $posts = Post::where('user_id', $user->id)->paginate(5);
+        $posts = Post::where('user_id', $user->id)->latest()->paginate(8);
         // Existe la opción de utilizar la colección de posts que va cargada en el usuario gracias a la relación 1:N
         // pero esta opción no admite la paginación en el template
+        // $user->posts
 
         return view('dashboard', [
             'user' => $user,
