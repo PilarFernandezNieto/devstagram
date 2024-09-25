@@ -9,19 +9,21 @@
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
 
+    @livewireStyles
+
 </head>
 
 <body class="bg-gray-100">
     <header class="p-5 border-bottom bg-white shadow">
         <div class="container mx-auto flex justify-between items-center">
-            <a href="{{route('home')}}" class="text-3xl font-black">DevStagram
-                <h1 ></h1>
+            <a href="{{ route('home') }}" class="text-3xl font-black">DevStagram
+                <h1></h1>
             </a>
 
             @auth
                 <nav class="flex gap-2 items-center">
-                    <a
-                        href="{{route('posts.create')}}" class="flex items-center gap-2 bg-white border p-2 text-gray-600 rounded text-sm uppercase font-bold cursor-pointer">
+                    <a href="{{ route('posts.create') }}"
+                        class="flex items-center gap-2 bg-white border p-2 text-gray-600 rounded text-sm uppercase font-bold cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -31,7 +33,8 @@
                         </svg>
 
                         Crear</a>
-                    <a href="{{route('posts.index', auth()->user()->username)}}" class="font-bold text-gray-600 text-sm">Hola, <span
+                    <a href="{{ route('posts.index', auth()->user()->username) }}"
+                        class="font-bold text-gray-600 text-sm">Hola, <span
                             class="font-normal">{{ auth()->user()->username }}</span></a>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
@@ -58,7 +61,7 @@
         {{-- HELPERS LARAVEL --}}
         DevStagram - Todos los derechos reservados {{ now()->year }}
     </footer>
-
+    @livewireScripts
 </body>
 
 </html>
