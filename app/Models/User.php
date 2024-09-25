@@ -9,8 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Like;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable {
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -45,24 +44,30 @@ class User extends Authenticatable
     ];
 
     // Relaciones
-    public function posts(){
+    public function posts() {
         return $this->hasMany(Post::class);
     }
-    public function likes(){
+    public function likes() {
         return $this->hasMany(Like::class);
     }
 
     // Almacena los seguidores de un usuario
-    public function followers(){
+    public function followers() {
         return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id')->withTimestamps();
         // withTimeStamps() se utiliza porque en el controlador estamos creado el registro con attach, que no actualiza los campos
         // created_at y modified_at
     }
 
-    // Comprueba si un usuario sigue a otro
-    public function siguiendo(User $user){
-        return $this->followers->contains($user->id);
+    // Almacena los que seguimos
+    public function followings() {
+        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id')->withTimestamps();
+        // withTimeStamps() se utiliza porque en el controlador estamos creado el registro con attach, que no actualiza los campos
+        // created_at y modified_at
     }
 
-    // Almacena los que seguimos
+
+    // Comprueba si un usuario sigue a otro
+    public function siguiendo(User $user) {
+        return $this->followers->contains($user->id);
+    }
 }
